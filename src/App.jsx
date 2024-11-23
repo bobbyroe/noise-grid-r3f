@@ -49,12 +49,7 @@ function NoiseGrid() {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial 
-        alphaTest={0.5}
-        vertexColors 
-        size={0.1} 
-        map={sprite} 
-      />
+      <pointsMaterial alphaTest={0.5} vertexColors size={0.1} map={sprite} />
     </points>
   );
 }
@@ -63,7 +58,7 @@ function App() {
   return (
     <Canvas gl={{ toneMapping: THREE.NoToneMapping }}>
       <EffectComposer>
-        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} /> */}
+        <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
       </EffectComposer>
       <NoiseGrid />
       <OrbitControls />
