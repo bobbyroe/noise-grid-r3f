@@ -3,7 +3,6 @@ import React from "react";
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { ImprovedNoise } from "./ImprovedNoise.js";
-import { Bloom, EffectComposer } from "@react-three/postprocessing";
 const Noise = new ImprovedNoise();
 function NoiseGrid() {
   const ref = React.useRef();
@@ -57,9 +56,6 @@ function NoiseGrid() {
 function App() {
   return (
     <Canvas gl={{ toneMapping: THREE.NoToneMapping }}>
-      <EffectComposer>
-        <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
-      </EffectComposer>
       <NoiseGrid />
       <OrbitControls />
     </Canvas>
