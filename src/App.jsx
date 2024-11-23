@@ -1,29 +1,38 @@
-import * as THREE from "three";
-import { useRef } from "react";
+import React from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import getLayer from "./getLayer";
+
+const bgSprites = getLayer({ 
+  numSprites: 8, 
+  radius: 10, 
+  z: -10.5, 
+  size: 24, 
+  opacity: 0.2, 
+  path: "./rad-grad.png" 
+})
 
 function IcoSphere() {
-  const ref = useRef();
-  let currentTime = 0;
-  useFrame((_, deltaTime) => {
-    currentTime += deltaTime * 0.33;
-    ref.current.rotation.y = currentTime;
-  });
+  const icoRef = React.useRef();
 
+  useFrame(() => {
+    icoRef.current.rotation.x += 0.01;
+    icoRef.current.rotation.y += 0.01;
+  });
   return (
-    <mesh ref={ref}>
-      <icosahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial color={0xffff00} flatShading />
+    <mesh ref={icoRef}>
+      <icosahedronGeometry />
+      <meshStandardMaterial color={0xffff00} />
     </mesh>
   );
 }
 
 function App() {
   return (
-    <Canvas gl={{ toneMapping: THREE.NoToneMapping }}>
+    <Canvas>
       <IcoSphere />
-      <hemisphereLight args={[0xffffff, 0x000000, 2.0]} />
+      <hemisphereLight args={[0xffffff, 0x000000, 1.0]} />
+      <primitive object={bgSprites} />
       <OrbitControls />
     </Canvas>
   );
